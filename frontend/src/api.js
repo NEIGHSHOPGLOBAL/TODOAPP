@@ -1,4 +1,5 @@
-const BASE_URL = "/api/todos";
+const API_URL = import.meta.env.VITE_API_URL || "";
+const BASE_URL = `${API_URL}/api/todos`;
 
 async function handleResponse(res) {
   if (!res.ok) {

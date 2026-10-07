@@ -1,0 +1,17 @@
+[Unit]
+Description=TodoApp Flask backend (Gunicorn)
+After=network.target
+
+[Service]
+User=www-data
+Group=www-data
+WorkingDirectory=/var/www/todoapp/backend
+Environment="CORS_ORIGINS=https://todo.neighshopglobal.com"
+Environment="DATABASE_URL=sqlite:////var/www/todoapp/backend/todos.db"
+Environment="FLASK_DEBUG=0"
+ExecStart=/var/www/todoapp/backend/venv/bin/gunicorn -w 3 -b 127.0.0.1:8000 app:app
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target

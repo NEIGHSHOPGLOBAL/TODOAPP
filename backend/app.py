@@ -1,3 +1,4 @@
+import os
 from datetime import datetime, timezone
 
 from flask import Flask, jsonify, request
@@ -5,11 +6,17 @@ from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///todos.db"
+app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get(
+    "DATABASE_URL", "sqlite:///todos.db"
+)
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 db = SQLAlchemy(app)
-CORS(app)
+
+CORS_ORIGINS = os.environ.get(
+    "CORS_ORIGINS", "http://localhost:5173,http://localhost:5174"
+).split(",")
+CORS(app, origins=CORS_ORIGINS)
 
 
 class Todo(db.Model):
@@ -82,4 +89,4 @@ def health():
 
 
 if __name__ == "__main__":
-    app.run(debug=True, port=5000)
+    app.run(debug=os.environ.get("FLASK_DEBUG", "0") == "1", port=5000)
