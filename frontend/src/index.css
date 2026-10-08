@@ -1,23 +1,33 @@
 :root {
   font: 16px/1.5 system-ui, "Segoe UI", Roboto, sans-serif;
   color-scheme: light;
-  background: #f3f4f6;
-  color: #1a1a1a;
+  background: #f4efff;
+  color: #252044;
 }
 
 :root[data-theme="dark"] {
   color-scheme: dark;
-  background: #111827;
+  background: #17152b;
   color: #f3f4f6;
 }
 
 body {
   margin: 0;
   min-height: 100vh;
-  background: inherit;
+  background:
+    radial-gradient(circle at 10% 15%, rgba(255, 195, 106, 0.42), transparent 28rem),
+    radial-gradient(circle at 90% 80%, rgba(226, 94, 164, 0.24), transparent 30rem),
+    #f4efff;
 }
 
 #root {
   width: 100%;
   box-sizing: border-box;
+}
+
+:root[data-theme="dark"] body {
+  background:
+    radial-gradient(circle at 10% 15%, rgba(111, 82, 193, 0.28), transparent 28rem),
+    radial-gradient(circle at 90% 80%, rgba(190, 62, 131, 0.2), transparent 30rem),
+    #17152b;
 }

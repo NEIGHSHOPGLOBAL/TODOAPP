@@ -89,7 +89,7 @@ function App() {
           onClick={() => setTheme((current) => (current === "light" ? "dark" : "light"))}
           aria-label={`Switch to ${theme === "light" ? "dark" : "light"} theme`}
         >
-          {theme === "light" ? "Dark" : "Light"}
+          <span aria-hidden="true">{theme === "light" ? "☾" : "☀"}</span>
         </button>
       </div>
 
