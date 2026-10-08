@@ -60,7 +60,7 @@ sudo systemctl daemon-reload
 sudo systemctl enable --now todoapp-backend
 ```
 
-The service sets `CORS_ORIGINS=https://todo.neighshopglobal.com` and runs Gunicorn on `127.0.0.1:8000`. Adjust `DATABASE_URL` in the unit file if you move the SQLite file (or point it at Postgres/MySQL).
+The service sets `CORS_ORIGINS=https://todo.neighshopglobal.com,https://staging.todo.neighshopglobal.com` and runs Gunicorn on `127.0.0.1:8000`. Adjust `DATABASE_URL` in the unit file if you move the SQLite file (or point it at Postgres/MySQL).
 
 ### 2. Frontend (build locally or on the server)
 

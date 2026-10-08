@@ -15,7 +15,7 @@ db = SQLAlchemy(app)
 
 CORS_ORIGINS = os.environ.get(
     "CORS_ORIGINS",
-    "http://localhost:5173,http://localhost:5174,https://todo.neighshopglobal.com",
+    "http://localhost:5173,http://localhost:5174,https://todo.neighshopglobal.com,https://staging.todo.neighshopglobal.com",
 )
 CORS_ORIGINS = [origin.strip() for origin in CORS_ORIGINS.split(",") if origin.strip()]
 CORS(app, origins=CORS_ORIGINS)
