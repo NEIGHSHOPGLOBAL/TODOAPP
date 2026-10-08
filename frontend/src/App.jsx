@@ -10,6 +10,7 @@ function App() {
   const [editingId, setEditingId] = useState(null);
   const [editingTitle, setEditingTitle] = useState("");
   const [theme, setTheme] = useState(() => localStorage.getItem("todo-theme") || "light");
+  const [timer, setTimer] = useState(5);
 
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
@@ -21,6 +22,14 @@ function App() {
       .then(setTodos)
       .catch((err) => setError(err.message))
       .finally(() => setLoading(false));
+  }, []);
+
+  useEffect(() => {
+    const interval = window.setInterval(() => {
+      setTimer((current) => Math.max(0, current - 1));
+    }, 1000);
+
+    return () => window.clearInterval(interval);
   }, []);
 
   async function handleAdd(e) {
@@ -92,6 +101,16 @@ function App() {
           <span aria-hidden="true">{theme === "light" ? "☾" : "☀"}</span>
         </button>
       </div>
+
+      {timer > 0 && (
+        <div className="timer-toast" role="status" aria-live="polite">
+          <span className="timer-icon" aria-hidden="true">◷</span>
+          <span>
+            <strong>iTimer</strong>
+            <small>{timer}s remaining</small>
+          </span>
+        </div>
+      )}
 
       <form className="add-form" onSubmit={handleAdd}>
         <input
