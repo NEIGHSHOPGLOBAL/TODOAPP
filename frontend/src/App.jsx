@@ -9,6 +9,12 @@ function App() {
   const [error, setError] = useState("");
   const [editingId, setEditingId] = useState(null);
   const [editingTitle, setEditingTitle] = useState("");
+  const [theme, setTheme] = useState(() => localStorage.getItem("todo-theme") || "light");
+
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme;
+    localStorage.setItem("todo-theme", theme);
+  }, [theme]);
 
   useEffect(() => {
     getTodos()
@@ -75,7 +81,17 @@ function App() {
 
   return (
     <div className="app">
-      <h1>To-Do List</h1>
+      <div className="app-header">
+        <h1>To-Do List</h1>
+        <button
+          className="theme-toggle"
+          type="button"
+          onClick={() => setTheme((current) => (current === "light" ? "dark" : "light"))}
+          aria-label={`Switch to ${theme === "light" ? "dark" : "light"} theme`}
+        >
+          {theme === "light" ? "Dark" : "Light"}
+        </button>
+      </div>
 
       <form className="add-form" onSubmit={handleAdd}>
         <input
